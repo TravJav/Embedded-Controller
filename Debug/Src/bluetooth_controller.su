@@ -1,0 +1,6 @@
+bluetooth_controller.c:4:6:confirm_connection	72	static
+bluetooth_controller.c:10:6:confirm_master_connected	0	static
+bluetooth_controller.c:14:6:transmit_camera_image	0	static
+bluetooth_controller.c:18:6:turn_off_device	0	static
+bluetooth_controller.c:20:6:take_photo	0	static
+bluetooth_controller.c:22:6:send_error_message	0	static
