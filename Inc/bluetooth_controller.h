@@ -18,4 +18,8 @@ char bluetooth_status(void);
 
 void turn_off_device(void);
 
+void toggle_led_light_on(void);
+
+void toggle_led_light_off(void);
+
 #endif /* BLUETOOTH_CONTROLLER_H_ */

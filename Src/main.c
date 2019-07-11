@@ -25,43 +25,11 @@
 #include "bluetooth_controller.h"
 #define RXBUFFERSIZE 1
 
-
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-/* UART2 Interrupt Service Routine */
-// void USART1_IRQHandler(void)
-// {
-//   HAL_UART_IRQHandler(&huart1);
-// }
-
-// /* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */
-// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-// {
-//   HAL_UART_Transmit(&huart1, buffer, 1, 100);
-//   if (huart->Instance == USART1)
-//   {
-//     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); //Toggle the state of pin PC9
-//     HAL_Delay(500);                         //delay 100ms
-//     /* Transmit one byte with 100 ms timeout */
-//     HAL_UART_Transmit(&huart1, buffer, 1, 100);
-
-//     /* Receive one byte in interrupt mode */
-//     HAL_UART_Receive_IT(&huart1, &buffer, 5);
-//   }
-// }
 
 int main(void)
 {
@@ -94,30 +62,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char message[26] = "hey I am connected to you";
-  char on[6] = "LED on";
-  char off[7] = "LED off";
-  char generic_buffer[3];
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
   while (1)
   {
 
-    HAL_UART_Receive(&huart1, &generic_buffer, sizeof(generic_buffer), HAL_MAX_DELAY);
-    if (generic_buffer[0] == 'y')
-    {
-      HAL_UART_Transmit(&huart1, &on, sizeof(on), HAL_MAX_DELAY);
-      HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); //Toggle the state of pin P13 ( onboard LED pin for bluepill)
-      // HAL_Delay(500);
-      strcpy(generic_buffer,"");
-    }
-
-    if (generic_buffer[0] == 'n')
-    {
-      HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-      HAL_UART_Transmit(&huart1, &off, sizeof(off), HAL_MAX_DELAY);
-            strcpy(generic_buffer,"");
-    }
+    toggle_led_light_off();
+    toggle_led_light_on();
   }
 }
 
