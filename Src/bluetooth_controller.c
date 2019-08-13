@@ -22,7 +22,7 @@ void toggle_led_light_on()
     if (generic_buffer[0] == 'y')
     {
         HAL_UART_Transmit(&huart1, &on, sizeof(on), HAL_MAX_DELAY);
-        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); //Toggle the state of pin P13 ( onboard LED pin for bluepill)
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1); //Toggle the state of pin P13 ( onboard LED pin for bluepill)
         // HAL_Delay(500);
         strcpy(generic_buffer, "");
     }
@@ -32,7 +32,7 @@ void toggle_led_light_off()
 {
     if (generic_buffer[0] == 'n')
     {
-        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
         HAL_UART_Transmit(&huart1, &off, sizeof(off), HAL_MAX_DELAY);
         strcpy(generic_buffer, "");
     }
