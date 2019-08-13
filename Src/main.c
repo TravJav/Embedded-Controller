@@ -24,6 +24,10 @@
 #include "usart.h"
 #include "gpio.h"
 #include "bluetooth_controller.h"
+#include "ssd1306.h"
+#include "fonts.h"
+#include "test.h"
+#include "bitmap.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,6 +96,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
+  SSD1306_Init(); // initialize the diaply
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -100,8 +105,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-     toggle_led_light_off();
-     toggle_led_light_on();
+    //https://www.controllerstech.com/oled-display-using-i2c-stm32/
+    SSD1306_GotoXY(10, 10);               // goto 10, 10
+    SSD1306_Puts("Hello", &Font_7x10, 1); // print Hello
+    SSD1306_GotoXY(10, 30);
+    SSD1306_Puts("World !!", &Font_7x10, 1);
+    SSD1306_Puts("2019 !!", &Font_7x10, 1);
+    SSD1306_UpdateScreen(); // update screen
+    toggle_led_light_off();
+    toggle_led_light_on();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -130,8 +142,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
@@ -159,7 +170,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -168,7 +179,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
