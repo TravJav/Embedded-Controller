@@ -8,7 +8,7 @@
 
 void init_display()
 {
-    SSD1306_Init(); // initialize the diaply
+ // initialize the diaply
 }
 
 void update_view()

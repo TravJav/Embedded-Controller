@@ -26,7 +26,7 @@ void toggle_led_light_on()
         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
         // HAL_Delay(500);
         strcpy(generic_buffer, "");
-        // display_bluetooth_message("led on");
+         display_bluetooth_message("led on");
     }
 }
 
@@ -37,7 +37,7 @@ void toggle_led_light_off()
         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
         HAL_UART_Transmit(&huart1, &off, sizeof(off), HAL_MAX_DELAY);
         strcpy(generic_buffer, "");
-        // display_bluetooth_message("led off");
+         display_bluetooth_message("led off");
     }
 }
 
