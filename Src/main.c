@@ -24,10 +24,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "bluetooth_controller.h"
-#include "ssd1306.h"
-#include "fonts.h"
-#include "test.h"
-#include "bitmap.h"
+#include "display.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -96,22 +93,11 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
-  SSD1306_Init(); // initialize the diaply
-  /* USER CODE BEGIN 2 */
+  init_display();
 
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    //https://www.controllerstech.com/oled-display-using-i2c-stm32/
-    SSD1306_GotoXY(10, 10);               // goto 10, 10
-    SSD1306_Puts("Hello", &Font_7x10, 1); // print Hello
-    SSD1306_GotoXY(10, 30);
-    SSD1306_Puts("World !!", &Font_7x10, 1);
-    SSD1306_Puts("2019 !!", &Font_7x10, 1);
-    SSD1306_UpdateScreen(); // update screen
     toggle_led_light_off();
     toggle_led_light_on();
     /* USER CODE END WHILE */
