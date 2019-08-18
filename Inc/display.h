@@ -15,6 +15,8 @@
 
 void display_new_text();
 
+void perform_demo();
+
 void update_view();
 
 void perform_animation();
@@ -27,7 +29,7 @@ void display_warning_message();
 
 void start_up_confirmation();
 
-void display_bluetooth_message(char);
+void display_bluetooth_message();
 
 void init_display();
 

@@ -95,15 +95,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
-  // init_display();
   SSD1306_Init();
+  perform_demo();
+
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    SSD1306_GotoXY(10, 10); // goto 10, 10
-    SSD1306_Puts("Travis Haycock is The Master", &Font_7x10, 1);
-     SSD1306_UpdateScreen(); // update screen
-    // toggle_led_light_off();
+    toggle_led_light_off();
     toggle_led_light_on();
     /* USER CODE END WHILE */
 
