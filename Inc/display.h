@@ -29,7 +29,7 @@ void display_warning_message();
 
 void start_up_confirmation();
 
-void display_bluetooth_message();
+void display_bluetooth_message(volatile uint8_t *generic_buffer);
 
 void init_display();
 

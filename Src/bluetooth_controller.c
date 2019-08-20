@@ -1,9 +1,6 @@
 #include "bluetooth_controller.h"
 #include "display.h"
 
-char on[6] = "LED on";
-char off[7] = "LED off";
-char generic_buffer[1];
 
 void confirm_connection()
 {
@@ -18,26 +15,28 @@ void confirm_master_connected()
 
 void toggle_led_light_on()
 {
+    char on[6] = "LED on";
+    volatile uint8_t generic_buffer[10];
     HAL_UART_Receive(&huart1, &generic_buffer, sizeof(generic_buffer), HAL_MAX_DELAY);
     if (generic_buffer[0] == 'y')
     {
         display_bluetooth_message(generic_buffer[0]);
         HAL_UART_Transmit(&huart1, &on, sizeof(on), HAL_MAX_DELAY);
         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-        strcpy(generic_buffer, "");
-        display_bluetooth_message("led on");
+        display_bluetooth_message(generic_buffer);
     }
 }
 
 void toggle_led_light_off()
 {
+    char off[7] = "LED off";
+    volatile uint8_t generic_buffer[10];
     HAL_UART_Receive(&huart1, &generic_buffer, sizeof(generic_buffer), HAL_MAX_DELAY);
     if (generic_buffer[0] == 'n')
     {
         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
         HAL_UART_Transmit(&huart1, &off, sizeof(off), HAL_MAX_DELAY);
-        strcpy(generic_buffer, "");
-        display_bluetooth_message("led off");
+        display_bluetooth_message(generic_buffer);
     }
 }
 

@@ -18,11 +18,15 @@ void update_view()
   SSD1306_Fill(0); //clear oled
 }
 
-void display_bluetooth_message()
+void display_bluetooth_message(volatile uint8_t *generic_buffer)
 {
-    update_view();
-    SSD1306_GotoXY(0, 0);
-    SSD1306_Puts("message received", &Font_7x10,  SSD1306_COLOR_WHITE);
+    SSD1306_GotoXY(0, 0);               // goto 10, 10
+    SSD1306_Puts("Hello", &Font_11x18, 1); // print Hello
+    SSD1306_GotoXY(10, 30);
+    SSD1306_Puts(generic_buffer, &Font_11x18, 1);
+    SSD1306_UpdateScreen();
+    HAL_Delay(5000);
+    SSD1306_ScrollRight(0x00, 0x0f);
 }
 
 void perform_animation() {}
